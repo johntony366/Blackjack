@@ -8,9 +8,9 @@
 #include <cassert>
 #include <limits>
 
-bool startMenu(deck_type& deck)
+bool startMenu(deck_type& deck, bool& no_exit)
 {
-    std::cout << "1. Display deck\n" << "2. Shuffle deck\n" << "3. Start game\n";
+    std::cout << "1. Display deck\n" << "2. Shuffle deck\n" << "3. Start game\n" << "4. Exit\n";
     
     char choice{ };
     std::cout << "Choose option: ";
@@ -22,6 +22,7 @@ bool startMenu(deck_type& deck)
         case '1':   std::cout << '\n'; printCards(deck); std::cout << '\n'; return false;
         case '2':   std::cout << '\n'; shuffleDeck(deck); std::cout << "The deck was shuffled\n\n"; return false;
         case '3':   std::cout << "\n"; return true;
+        case '4':   no_exit = false; return false;
         default:    std::cout << "Please enter a valid option!\n"; return false;
     }
 }

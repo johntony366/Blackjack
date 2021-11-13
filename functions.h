@@ -1,7 +1,7 @@
 #pragma once
 #include "main.h"
 
-bool startMenu(deck_type& deck);
+bool startMenu(deck_type& deck, bool& no_exit);
 void printCard(const Card& card);
 template <typename T> void printCards(const T& cards);
 deck_type createDeck();

@@ -7,9 +7,10 @@
 int main()
 {
     deck_type deck{ createDeck() };
-    while (true)
+    bool no_exit{ true };
+    while (no_exit)
     {
-        if (!startMenu(deck))
+        if (!startMenu(deck, no_exit))
         {
             continue;
         }
