@@ -8,6 +8,24 @@
 #include <cassert>
 #include <limits>
 
+bool startMenu(deck_type& deck)
+{
+    std::cout << "1. Display deck\n" << "2. Shuffle deck\n" << "3. Start game\n";
+    
+    char choice{ };
+    std::cout << "Choose option: ";
+    std::cin >> choice;
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+
+    switch (choice)
+    {
+        case '1':   std::cout << '\n'; printCards(deck); std::cout << '\n'; return false;
+        case '2':   std::cout << '\n'; shuffleDeck(deck); std::cout << "The deck was shuffled\n\n"; return false;
+        case '3':   std::cout << "\n"; return true;
+        default:    std::cout << "Please enter a valid option!\n"; return false;
+    }
+}
+
 void printCard(const Card& card)
 {
     switch (card.cardRank)
@@ -109,7 +127,7 @@ void displayCardsAndScores(Dealer& dealer, Player& player)
     std::cout << "The dealer's score is: " << dealer.score << "\n\n";
     std::cout << "Your cards are: ";
     printCards(player.cards);
-    std::cout << "Your score is: " << player.score << '\n';
+    std::cout << "Your score is: " << player.score << "\n\n";
 }
 
 bool playerWantsHit()
@@ -123,9 +141,9 @@ bool playerWantsHit()
 
         switch (choice)
         {
-            case 'h': std::cout <<  "You chose to hit!\n";   return true;
-            case 's': std::cout <<  "You chose to stand!\n"; return false;
-            default:    std::cout <<"Please try again!\n";  continue;
+            case 'h': std::cout <<  "You chose to hit";   return true;
+            case 's': std::cout <<  "You chose to stand!\n\n"; return false;
+            default:    std::cout <<"Please try again!\n\n";  continue;
         }
     }
 }
@@ -161,6 +179,9 @@ bool playerTurn(Dealer& dealer, Player& player, const deck_type& deck, index_typ
         {
             ++(player.aces);
         }
+        std::cout << " and drew ";
+        printCard(deck[cardNum]);
+        std::cout << "\n\n";
         ++cardNum;
         if (!checkPlayerScore(player))
         {
@@ -183,6 +204,9 @@ bool dealerTurn(Dealer& dealer, Player& player, const deck_type& deck, index_typ
         {
             ++(dealer.aces);
         }
+        std::cout << "The Dealer drew ";
+        printCard(deck[cardNum]);
+        std::cout << "\n\n";
         ++cardNum;
     }
     displayCardsAndScores(dealer, player);
@@ -203,7 +227,7 @@ BlackjackResult playBlackjack(const deck_type& deck)
 
     else if (!dealerTurn(dealer, player, deck, cardNum))
     {
-        return BlackjackResult::dealer_wins;
+        return BlackjackResult::player_wins;
     }
 
     else if (player.score > dealer.score)
