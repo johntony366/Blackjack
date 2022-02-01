@@ -41,6 +41,7 @@ bool Blackjack::startGame()
 		return playAgainMessage(player, dealer, deck);
 	default:
 		assert(false && "Invalid game ending");
+		return false;
 	}
 }
 
