@@ -22,4 +22,4 @@ The dealer repeatedly draws until they reach a score of 17 or more, at which poi
 
 If the dealer goes over a score of 21, they bust and the player wins immediately.
 
-Otherwise, if the player has a higher score than the dealer, the player wins. Otherwise, the game ends in a draw.
+If neither bust, the one with the higher score wins. If both have the same scores, the game ends in a draw.
